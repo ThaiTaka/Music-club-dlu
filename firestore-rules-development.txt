@@ -1,0 +1,55 @@
+// Firebase Firestore Security Rules for Development
+// ⚠️ CHỈ SỬ DỤNG CHO DEVELOPMENT - KHÔNG PRODUCTION!
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow all reads and writes for development
+    // TODO: Thay đổi rules này cho production
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+
+/*
+HƯỚNG DẪN CẤU HÌNH:
+
+1. Vào Firebase Console: https://console.firebase.google.com
+2. Chọn project "music-club-dlu"
+3. Vào Firestore Database > Rules
+4. Copy rules ở trên và paste vào
+5. Click "Publish"
+
+⚠️ LƯU Ý BẢO MẬT:
+- Rules này cho phép ai cũng đọc/ghi dữ liệu
+- Chỉ dùng cho development và testing
+- Production cần rules nghiêm ngặt hơn
+
+📋 RULES CHO PRODUCTION (sau này):
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Events - public read, admin write
+    match /events/{eventId} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+                      request.auth.token.email.matches('.*@dlu.edu.vn');
+    }
+    
+    // Members - authenticated read, admin write  
+    match /members/{memberId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && 
+                      request.auth.token.email.matches('.*admin.*@dlu.edu.vn');
+    }
+    
+    // Settings - public read, admin write
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+                      request.auth.token.email.matches('.*admin.*@dlu.edu.vn');
+    }
+  }
+}
+*/
