@@ -15,6 +15,7 @@ import Events from './pages/Events';
 import Statistics from './pages/Statistics';
 import AdminSetup from './pages/AdminSetup';
 import AdminMembers from './pages/AdminMembers';
+import Attendance from './pages/Attendance';
 
 function App() {
   return (
@@ -75,6 +76,12 @@ function App() {
             <Route path="/su-kien" element={<Events />} />
 
             <Route path="/thanh-vien" element={<Members />} />
+
+            <Route path="/diem-danh" element={
+              <ProtectedRoute>
+                <Attendance />
+              </ProtectedRoute>
+            } />
 
             <Route path="/gioi-thieu" element={<About />} />
 

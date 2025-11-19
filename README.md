@@ -2,7 +2,23 @@
 
 Đây là website chính thức của Câu lạc bộ Âm nhạc Trường Đại học Đà Lạt, được xây dựng với React.js, Firebase, và Tailwind CSS.
 
-## 🎵 Tính năng chính
+## � Tính năng mới: Hệ thống Điểm danh Sự kiện (19/11/2025)
+
+> 🎉 **ĐÃ HOÀN THÀNH!** Hệ thống điểm danh hoàn chỉnh với real-time updates, thống kê trực quan và xuất báo cáo CSV.
+
+### ⚡ Quick Start
+👉 **[Đọc hướng dẫn nhanh tại đây: QUICK_START.md](QUICK_START.md)** (5 phút)
+
+### 📚 Full Documentation
+- **[INDEX.md](INDEX.md)** - Danh mục tất cả tài liệu
+- **[QUICK_START.md](QUICK_START.md)** - Hướng dẫn nhanh
+- **[README_ATTENDANCE.md](README_ATTENDANCE.md)** - Hướng dẫn người dùng
+- **[FIREBASE_SETUP_GUIDE.md](FIREBASE_SETUP_GUIDE.md)** - Setup Firebase
+- **[ATTENDANCE_SYSTEM_GUIDE.md](ATTENDANCE_SYSTEM_GUIDE.md)** - Tài liệu kỹ thuật
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Kiến trúc hệ thống
+- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Tổng hợp triển khai
+
+## �🎵 Tính năng chính
 
 ### Cho tất cả người dùng:
 - **Trang chủ**: Hero section, sự kiện sắp tới, giới thiệu câu lạc bộ
@@ -15,11 +31,13 @@
 ### Cho người dùng đã đăng nhập:
 - **Gửi góp ý**: Chia sẻ ý kiến về hoạt động của câu lạc bộ
 - **Cài đặt tài khoản**: Chỉnh sửa thông tin cá nhân, đổi mật khẩu
+- **⭐ Điểm danh sự kiện**: Điểm danh thành viên tham gia sự kiện (MỚI!)
 
 ### Cho Admin:
 - **Quản lý sự kiện**: Thêm, sửa, xóa sự kiện
 - **Quản lý thành viên**: Thêm, sửa, xóa thông tin thành viên
 - **Upload hình ảnh**: Tải ảnh cho sự kiện và thành viên
+- **⭐ Quản lý điểm danh**: Xem thống kê, xuất báo cáo CSV (MỚI!)
 
 ## 🛠 Công nghệ sử dụng
 
@@ -98,6 +116,15 @@ Tạo các collections sau trong Firestore:
 - `bio`: string
 - `profileImageUrl`: string
 - `joinedAt`: timestamp
+
+#### ⭐ Collection: `attendances` (MỚI)
+- `eventId`: string (reference đến events)
+- `memberId`: string (reference đến members)
+- `status`: string ('present' hoặc 'absent')
+- `checkedInAt`: timestamp
+- `checkedInBy`: string (email của người điểm danh)
+- `createdAt`: timestamp
+- `updatedAt`: timestamp
 
 #### Collection: `feedback`
 - `content`: string

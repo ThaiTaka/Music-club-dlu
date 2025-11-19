@@ -11,7 +11,8 @@ import {
   BarChart3, 
   Settings, 
   LogOut,
-  User as UserIcon
+  User as UserIcon,
+  UserCheck
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -27,6 +28,7 @@ const Navbar = () => {
     { path: '/', label: 'Trang chủ', icon: Home },
     { path: '/su-kien', label: 'Sự kiện', icon: Calendar },
     { path: '/thanh-vien', label: 'Thành viên', icon: Users },
+    { path: '/diem-danh', label: 'Điểm danh', icon: UserCheck, requireAuth: true },
     { path: '/gioi-thieu', label: 'Giới thiệu', icon: Info },
     { path: '/thong-ke', label: 'Thống kê', icon: BarChart3 }
   ];
@@ -85,6 +87,9 @@ const Navbar = () => {
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => {
+              // Skip links that require auth if user is not authenticated
+              if (link.requireAuth && !currentUser) return null;
+              
               const Icon = link.icon;
               return (
                 <Link
@@ -229,6 +234,9 @@ const Navbar = () => {
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navLinks.map((link) => {
+                // Skip links that require auth if user is not authenticated
+                if (link.requireAuth && !currentUser) return null;
+                
                 const Icon = link.icon;
                 return (
                   <Link
